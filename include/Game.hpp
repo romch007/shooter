@@ -11,6 +11,10 @@ public:
   static constexpr int move_step = 10;
   static constexpr float cell_size = 500.0;
 
+  static const sf::Color sky_color;
+  static const sf::Color wall_color;
+  static const sf::Color floor_color;
+
   static void start(const std::string &map_filename);
 
 private:

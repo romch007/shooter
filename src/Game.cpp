@@ -6,6 +6,10 @@
 #include <Utils.hpp>
 #include <iostream>
 
+const sf::Color Game::sky_color = sf::Color(135, 206, 235);
+const sf::Color Game::wall_color = sf::Color::Black;
+const sf::Color Game::floor_color = sf::Color(150, 85, 0);
+
 void Game::start(const std::string &map_filename) {
   Game(map_filename).internal_start();
 }
@@ -78,11 +82,11 @@ void Game::draw_screen_column(int x, sf::Image &screen,
 
   for (int y = 0; y < heigth / 2; y++) {
     if (y < (static_cast<float>(heigth) / 2) - wall_height) {
-      screen.setPixel(x, y, sf::Color(135, 206, 235));
-      screen.setPixel(x, (heigth - 1) - y, sf::Color(150, 85, 0));
+      screen.setPixel(x, y, sky_color);
+      screen.setPixel(x, (heigth - 1) - y, floor_color);
     } else {
-      screen.setPixel(x, y, sf::Color::Black);
-      screen.setPixel(x, (heigth - 1) - y, sf::Color::Black);
+      screen.setPixel(x, y, wall_color);
+      screen.setPixel(x, (heigth - 1) - y, wall_color);
     }
   }
 }
