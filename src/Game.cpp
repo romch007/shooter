@@ -17,7 +17,7 @@ void Game::start(const std::string &map_filename) {
 Game::Game(const std::string &map_filename)
     : m_window(sf::VideoMode(width, heigth), "Shooter"),
       m_map(Map::from_file(map_filename)) {
-  m_window.setFramerateLimit(60);
+  m_window.setVerticalSyncEnabled(true);
 }
 
 void Game::internal_start() {
