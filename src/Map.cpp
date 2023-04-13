@@ -8,7 +8,7 @@ Map Map::from_file(const std::string &filename) {
   Map map;
   std::ifstream file(filename);
 
-  if (file.bad())
+  if (!file.is_open())
     throw std::runtime_error("Error reading file");
 
   file >> map.m_height;
