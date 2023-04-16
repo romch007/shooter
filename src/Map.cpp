@@ -4,12 +4,11 @@
 #include <fstream>
 #include <stdexcept>
 
-Map Map::from_file(const std::string &filename) {
+Map Map::from_file(const std::string& filename) {
   Map map;
   std::ifstream file(filename);
 
-  if (!file.is_open())
-    throw std::runtime_error("Error reading file");
+  if (!file.is_open()) throw std::runtime_error("Error reading file");
 
   file >> map.m_height;
   file >> map.m_width;
@@ -31,8 +30,8 @@ Map Map::from_file(const std::string &filename) {
   return map;
 }
 
-float Map::intersection_to_wall(const sf::Vector2f &position,
-                                const sf::Vector2f &direction) const {
+float Map::intersection_to_wall(const sf::Vector2f& position,
+                                const sf::Vector2f& direction) const {
   sf::Vector2f ray_step_size(
       std::sqrt(1 + std::pow(direction.y / direction.x, 2)),
       std::sqrt(1 + std::pow(direction.x / direction.y, 2)));

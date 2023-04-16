@@ -12,14 +12,17 @@ const sf::Color Game::sky_color = sf::Color(135, 206, 235);
 const sf::Color Game::wall_color = sf::Color::Black;
 const sf::Color Game::floor_color = sf::Color(150, 85, 0);
 
-void Game::start(const std::string &map_filename, int fov, int width,
+void Game::start(const std::string& map_filename, int fov, int width,
                  int heigth) {
   Game(map_filename, fov, width, heigth).internal_start();
 }
 
-Game::Game(const std::string &map_filename, int fov, int width, int heigth)
-    : m_window(sf::VideoMode(width, heigth), "Shooter"), m_player(m_map, fov),
-      m_map(Map::from_file(map_filename)), m_heigth(heigth), m_width(width) {
+Game::Game(const std::string& map_filename, int fov, int width, int heigth)
+    : m_window(sf::VideoMode(width, heigth), "Shooter"),
+      m_player(m_map, fov),
+      m_map(Map::from_file(map_filename)),
+      m_heigth(heigth),
+      m_width(width) {
   m_window.setVerticalSyncEnabled(true);
   if (!m_wall_image.loadFromFile("assets/wall.png"))
     throw std::runtime_error("cannot open texture file");
@@ -30,8 +33,7 @@ void Game::internal_start() {
     sf::Event event;
 
     while (m_window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed)
-        m_window.close();
+      if (event.type == sf::Event::Closed) m_window.close();
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
@@ -57,8 +59,7 @@ void Game::internal_start() {
 
     auto colliding = m_player.is_colliding();
 
-    if (colliding)
-      std::cout << "Collision!\n";
+    if (colliding) std::cout << "Collision!\n";
 
     draw_screen();
 
@@ -85,9 +86,9 @@ void Game::draw_screen() {
   m_window.draw(screen_sprite);
 }
 
-void Game::draw_screen_column(int x, sf::Image &screen,
-                              const sf::Vector2f &player_position,
-                              const sf::Vector2f &player_direction) {
+void Game::draw_screen_column(int x, sf::Image& screen,
+                              const sf::Vector2f& player_position,
+                              const sf::Vector2f& player_direction) {
   auto angle_shift = -m_width / 2 + x;
   float current_angle = (m_player.fov() / m_width) * angle_shift;
 

@@ -4,7 +4,7 @@
 #include <cxxopts.hpp>
 #include <iostream>
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   cxxopts::Options options("shooter", "Ray casting shooter");
 
   // clang-format off
@@ -22,7 +22,10 @@ int main(int argc, char **argv) {
     return 0;
   }
 
-  Game::start(result["map"].as<std::string>(),
-              degrees_to_radian(result["fov"].as<int>()), 1280, 720);
+  auto map = result["map"].as<std::string>();
+  auto fov = result["fov"].as<int>();
+  auto dimensions = parse_dimensions(result["dimensions"].as<std::string>());
+
+  Game::start(map, degrees_to_radian(fov), dimensions.first, dimensions.second);
   return 0;
 }
